@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<a href="/Kategori/Kategori"><br />Bütün Üyeler</a>
+<br />
+Hoşgeldin @HttpContext.Current.User.Identity.Name @*Welceom : mail adress*@
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout","User", FormMethod.Post, new { id="logoutForm" }))
+    {
+        <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+    }
+}

@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "KategoriOlustur";
+}
+
+@Html.AntiForgeryToken()
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script src="~/Content/js/KategoriOlustur.js"></script>
+
+
+<div class="form-horizontal">
+    <h4>Kategori Oluşturun</h4>
+    <hr />
+
+    <div class="form-group">
+
+
+        <div class="col-md-10">
+            <p>Kategori Adı</p>
+            <input type="text" class="control-label col-md-2" name="productname" id="productname" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="file" name="image" id="image" />
+        </div>
+    </div>
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" id="olustur" value="Create" class="btn btn-default" style="margin-left: -190px;
+    width: 110px;" />
+    </div>
+
+</div>
+<script>
+    $("#olustur").click(function () {
+        var productnamedata = $("#productname").val() // inputların idsini veriable'a atıyoruz.
+
+        var data = {
+            "productname": productnamedata, // ajax ile göndereceğimiz datayı tanımlıyoruz ve inputlardan gelen veriye eşitliyoruz.
+
+        }
+        //var postData = JSON.stringify({
+        //    updatedItems
+        //});
+        //var valdata = $("#makaleolustur").serialize();
+        $.ajax({
+            contentType: 'application/json',
+            dataType: 'json',
+            traditional: true,
+            type: "POST",
+            url: "/Kategori/KategoriOlustur",
+            data: JSON.stringify(data), // veri
+            success: function (response) {
+                alert('makale oluştu')
+                //setTimeout(function () { location.reload(); }, 2000);
+            },
+            error: function () {
+                alert('Makale oluşturulamadı')
+            }
+        });
+    })
+</script>
